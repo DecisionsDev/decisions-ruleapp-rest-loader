@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.ibm.odm.res.sample</groupId>
-	<artifactId>decisions-res-console-rest-loader</artifactId>
+	<artifactId>decisions-ruleapp-rest-loader</artifactId>
 	<packaging>jar</packaging>
 	<name>decisions-res-console-rest-loader</name>
 	<description>Execute an IBM ODM Decision Service dwonloaded from a remote Rule Execution Server Console</description>
