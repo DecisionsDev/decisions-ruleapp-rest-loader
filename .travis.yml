@@ -1,0 +1,52 @@
+language: java
+
+jdk:
+- oraclejdk8
+
+before_install:
+  # Deploy the RuleApp to a RES Console instance for testing purpose
+  - |-
+    curl -s -X POST -H "Content-Type: application/octet-stream" --data-binary @ruleapp/my-decision-service-1.0.jar -u $RES_CONSOLE_CREDENTIALS $RES_CONSOLE_URL/api/v1/ruleapps    
+  # Set the RES console instance URL and credentials used by the JUnit test
+  #- mkdir src/test/resources
+  - echo $TEST_RES_JSON_CONTENT > src/test/resources/test_RES.json
+  # Download ODM distribution if necessary
+  - 'if [ ! -d $HOME/.distrib/install/executionserver ]; then
+      echo "ODM distribution: Starting download...";
+      ODM_ZIP_URL=${ODM_URL}/${ODM_VERSION}/icp-docker-compose-build-images-${ODM_VERSION}.zip;
+      curl -H "X-JFrog-Art-Api: $ARTIFACTORY_API_KEY" $ODM_ZIP_URL -o tmp.zip;
+      echo "ODM distribution: Download finished...";
+      echo "ODM distribution: Unzipping...";
+      if [ ! -d $HOME/.distrib ]; then
+      	mkdir $HOME/.distrib;
+      fi;
+      unzip tmp.zip -d $HOME/.distrib;
+      echo "ODM distribution: Unzipping DecisionService.war webapp...";
+      unzip $HOME/.distrib/install/executionserver/applicationservers/WLP855/DecisionService.war -d $HOME/.distrib/install/executionserver/applicationservers/WLP855/DecisionService;
+      echo "ODM distribution: Removing unwanted JAR files from cache...";
+      rm -fr $HOME/.distrib/install/executionserver/lib/*.jar;
+      echo "ODM distribution: Installing j2ee_connector-1_5-fr.jar maven dependencies in $HOME/.distrib/install/executionserver/lib";
+      cp $HOME/.distrib/install/executionserver/applicationservers/WLP855/DecisionService/WEB-INF/lib/j2ee_connector-1_5-fr.jar $HOME/.distrib/install/executionserver/lib;
+      echo "ODM distribution: Installing jrules-engine.jar maven dependencies in $HOME/.distrib/install/executionserver/lib";
+      cp $HOME/.distrib/install/executionserver/applicationservers/WLP855/DecisionService/WEB-INF/lib/jrules-engine-8.9.2-SNAPSHOT.jar $HOME/.distrib/install/executionserver/lib/jrules-engine.jar;
+      echo "ODM distribution: Installing jrules-res-execution.jarr maven dependencies in $HOME/.distrib/install/executionserver/lib";
+      cp $HOME/.distrib/install/executionserver/applicationservers/WLP855/DecisionService/WEB-INF/lib/jrules-res-8.9.2-SNAPSHOT-execution.jar $HOME/.distrib/install/executionserver/lib/jrules-res-execution.jar;
+      echo "ODM distribution: Removing teamserver from cache...";
+      rm -fr $HOME/.distrib/install/teamserver;
+      echo "ODM distribution: Removing executionserver/applicationserver from cache...";
+      rm -fr $HOME/.distrib/install/executionserver/applicationserver;
+      echo "ODM distribution: Done installing in cache...";
+    else
+      echo "ODM distribution: Already present in cache...";
+      echo "ODM distribution: Skipping download...";
+    fi'
+install:
+  - mvn install -Dibm.odm.install.dir=$HOME/.distrib/install -Dmaven.javadoc.skip=true -B -V
+script:
+  - mvn test -B -Dibm.odm.install.dir=$HOME/.distrib/install -Dskip.tests=false 
+
+cache:
+  directories:
+  - $HOME/.m2
+  - $HOME/.distrib
+  

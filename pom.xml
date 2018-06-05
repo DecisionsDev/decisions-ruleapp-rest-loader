@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.ibm.odm.res.sample</groupId>
+	<artifactId>decisions-res-console-rest-loader</artifactId>
+	<packaging>jar</packaging>
+	<name>decisions-res-console-rest-loader</name>
+	<description>Execute an IBM ODM Decision Service dwonloaded from a remote Rule Execution Server Console</description>
+	<version>1.0</version>
+
+	<properties>
+		<ibm.odm.version>8.9.2</ibm.odm.version>
+		<skip.tests>true</skip.tests>
+	</properties>
+	
+	<repositories>
+		<repository>
+			<id>maven-repository</id>
+			<url>file:///${project.basedir}/maven-repository</url>
+		</repository>
+	</repositories>
+
+	<dependencies>
+		<!-- JUNIT FOR TESTING PURPOSE -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- SYSTEM RULES JUNIT LIBRARY TO TEST System.exit() -->
+		<dependency>
+  			<groupId>com.github.stefanbirkner</groupId>
+  			<artifactId>system-rules</artifactId>
+  			<version>1.18.0</version>
+  			<scope>test</scope>
+		</dependency>
+		<!-- DEPENDENCY TO JAVA XOM FOR COMPILATION PURPOSE -->
+		<dependency>
+			<groupId>my-xom</groupId>
+			<artifactId>my-xom</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<!-- CLI ARGUMENTS MANAGEMENT -->
+		<dependency>
+    		<groupId>commons-cli</groupId>
+    		<artifactId>commons-cli</artifactId>
+    		<version>1.3.1</version>
+		</dependency>
+		<!-- FOR CONNECTION TO RES CONSOLE -->
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.5.2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>2.8.8</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.8.8</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.3</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.4.2</version>
+					<configuration>
+						<skipTests>${skip.tests}</skipTests>
+					</configuration>
+			 </plugin>
+		</plugins>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+			</resource>
+			<resource>
+				<directory>src/main/i18n</directory>
+			</resource>
+		</resources>
+	</build>
+
+	<profiles>
+		<profile>
+			<!--
+				USE mvn-repo PROFILE TO FETCH IBM ODM
+			 	DEPENDENCIES FROM MAVEN REPOSITORY
+			  -->
+			<id>mvn-repo</id>
+			<!-- DEPENDENCIES TO IBM ODM RES JSE EXECUTION STACK -->
+			<dependencies>
+				<dependency>
+					<groupId>javax.resource</groupId>
+					<artifactId>connector-api</artifactId>
+					<version>1.5-IBM</version>
+				</dependency>
+				<dependency>
+					<groupId>com.ilog.rules.executionserver</groupId>
+					<artifactId>jrules-res</artifactId>
+					<classifier>execution</classifier>
+					<version>${ibm.odm.version}</version>
+				</dependency>
+				<dependency>
+					<groupId>com.ilog.rules.engine</groupId>
+					<artifactId>jrules-engine</artifactId>
+					<version>${ibm.odm.version}</version>
+				</dependency>
+			</dependencies>
+		</profile>
+		<profile>
+			<!--
+				USE install-dir PROFILE TO FETCH IBM ODM DEPENDENCIES
+			 	FROM THE PRODUCT INSTALLATION DIRECTORY
+			  -->
+			<id>install-dir</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<ibm.odm.install.dir>.</ibm.odm.install.dir>
+			</properties>
+			
+			<!-- DEPENDENCIES TO IBM ODM RES JSE EXECUTION STACK -->
+			<dependencies>
+				<dependency>
+					<groupId>javax.resource</groupId>
+					<artifactId>connector-api</artifactId>
+					<version>1.5-IBM</version>
+					<scope>system</scope>
+					<systemPath>${ibm.odm.install.dir}/executionserver/lib/j2ee_connector-1_5-fr.jar</systemPath>
+				</dependency>
+				<dependency>
+					<groupId>com.ilog.rules.executionserver</groupId>
+					<artifactId>jrules-res</artifactId>
+					<classifier>execution</classifier>
+					<version>${ibm.odm.version}</version>
+					<scope>system</scope>
+					<systemPath>${ibm.odm.install.dir}/executionserver/lib/jrules-res-execution.jar</systemPath>
+				</dependency>
+				<dependency>
+					<groupId>com.ilog.rules.engine</groupId>
+					<artifactId>jrules-engine</artifactId>
+					<version>${ibm.odm.version}</version>
+					<scope>system</scope>
+					<systemPath>${ibm.odm.install.dir}/executionserver/lib/jrules-engine.jar</systemPath>
+				</dependency>
+			</dependencies>
+		</profile>
+	</profiles>
+</project>

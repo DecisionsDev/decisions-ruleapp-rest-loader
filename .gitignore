@@ -1,0 +1,16 @@
+# Test output
+*.log
+
+# Maven
+target/
+
+# eclipse
+bin/
+.classpath
+.project
+.settings/
+
+# Mac OS
+.DS_Store
+
+src/test/resources/test_RES.json
