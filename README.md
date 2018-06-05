@@ -1,6 +1,7 @@
 # Execute an IBM ODM Decision Service downloaded from a remote Rule Execution Server Console 
 
-[![Build Status](https://travis.ibm.com/benjamin-ratiarisolo/res-jse-memory-res-console.svg?token=by2BAQBLJGxnqLDprkLj&branch=master)](https://travis.ibm.com/benjamin-ratiarisolo/res-jse-memory-res-console)
+
+[![Build Status](https://travis-ci.org/ODMDev/decisions-res-console-rest-loader.svg?branch=master)](https://travis-ci.org/ODMDev/decisions-res-console-rest-loader)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 This Java SE sample illustrates how to execute a decision service _downloaded from the ODM Rule Execution Server Console_ in Java SE with IBM Operational Decision Manager. 
@@ -80,5 +81,5 @@ mvn exec:java -Dexec.mainClass="j2serulesession.RESConsoleSample" -Dexec.args="/
 ## Notice
 © Copyright IBM Corporation 2018.
 
-[![Build Status](https://travis.ibm.com/benjamin-ratiarisolo/res-jse-memory-res-console.svg?token=by2BAQBLJGxnqLDprkLj&branch=master)](https://travis.ibm.com/benjamin-ratiarisolo/res-jse-memory-res-console)
+[![Build Status](https://travis-ci.org/ODMDev/decisions-res-console-rest-loader.svg?branch=master)](https://travis-ci.org/ODMDev/decisions-res-console-rest-loader)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
