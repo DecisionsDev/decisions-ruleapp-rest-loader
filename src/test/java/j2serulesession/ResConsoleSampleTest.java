@@ -82,9 +82,9 @@ public class ResConsoleSampleTest {
             exit.expectSystemExitWithStatus(2);
             String argLine = "--jsonFile invalid.json /test_deployment/loan_validation_with_score_and_grade";
             RESConsoleSample.main(argLine.split(" "));
+        } finally {
             String expectedErrorMessage = "The syntax of the JSON file 'invalid.json''s content is incorrect. The following error occurred when reading it";
             assertTrue("", systemErrRule.getLog().contains(expectedErrorMessage));
-        } finally {
             systemErrRule.clearLog();
         }
     }
@@ -95,9 +95,9 @@ public class ResConsoleSampleTest {
             exit.expectSystemExitWithStatus(2);
             String argLine = "--jsonFile unexpected.json /test_deployment/loan_validation_with_score_and_grade";
             RESConsoleSample.main(argLine.split(" "));
+        } finally {
             String expectedErrorMessage = "The content of the JSON file 'unexpected.json' cannot be mapped to an instance of the j2serulesession.ODMConsoleInformation class. The following error occurred when reading it:";
             assertTrue("", systemErrRule.getLog().contains(expectedErrorMessage));
-        } finally {
             systemErrRule.clearLog();
         }
     }
