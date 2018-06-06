@@ -6,7 +6,7 @@
 
 This Java SE sample illustrates how to execute a decision service _downloaded from the ODM Rule Execution Server Console_ in Java SE with IBM Operational Decision Manager. 
 
-It make uses of:
+It makes use of:
  * ODM [RES Console Management REST API](https://www.ibm.com/support/knowledgecenter/en/SSQP76_8.9.2/com.ibm.odm.dserver.rules.res.managing/topics/con_res_restapi_rsrcmng_intro.html)
  * ODM [Rule sessions JSE API](https://www.ibm.com/support/knowledgecenter/en/SSQP76_8.9.2/com.ibm.odm.dserver.rules.res.developing/topics/con_res_devclient_rule_sessions.html)
  * The [Java SE memory persistence](https://www.ibm.com/support/knowledgecenter/en/SSQP76_8.9.2/com.ibm.odm.dserver.rules.res.managing/topics/con_res_mem_persistence.html) introduced in *ODM 8.9.2*.
