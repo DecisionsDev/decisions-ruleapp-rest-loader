@@ -45,7 +45,7 @@ Deploy this RuleApp archive to your target RES Console with your preferred deplo
  * By logging into the RES Console web application from a browser and then adding the RuleApp.
  * By invoking the RES Console Management REST API with cURL from the command line: 
  ```
- curl -v -X POST -H "Content-Type: application/octet-stream" -d @./ruleapp/my-decision-service-1.0.jar -u <userName>:<password> <url>/apiauth/v1/ruleapps 
+ curl -v -X POST -H "Content-Type: application/octet-stream" --data-binary @./ruleapp/my-decision-service-1.0.jar -u <userName>:<password> <url>/apiauth/v1/ruleapps 
  ```
  Where:
    * `url` is the RES Console URL. For instance, `http://localhost:9080/res`
