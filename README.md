@@ -65,14 +65,14 @@ The RES Console URL and credentials should be made available in the `RESConsole.
 ## Building
 To build the source code, type the maven command:
 ```
-mvn clean install -Dibm.odm.install.dir=<ODM_INSTALL_DIR>"
+mvn clean install -Dibm.odm.install.dir="<ODM_INSTALL_DIR>"
 ```
 
 ## Running
  1. Make sure you have filled-in the RES Console URL and credentials in the `RESConsole.json` JSON file located at the root of the project's directory. 
  1. Type the following maven command:
 ```
-mvn exec:java -Dexec.mainClass="j2serulesession.RESConsoleSample" -Dexec.args="/test_deployment/loan_validation_with_score_and_grade" -Dexec.classpathScope="test" -Dibm.odm.install.dir=<ODM_INSTALL_DIR>"
+mvn exec:java -Dexec.mainClass="j2serulesession.RESConsoleSample" -Dexec.args="/test_deployment/loan_validation_with_score_and_grade" -Dexec.classpathScope="test" -Dibm.odm.install.dir="<ODM_INSTALL_DIR>"
 ```
 
 ## License
