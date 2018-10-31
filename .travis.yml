@@ -14,7 +14,7 @@ before_install:
   - 'if [ ! -d $HOME/.distrib/install/executionserver ]; then
       echo "ODM distribution: Starting download...";
       ODM_ZIP_URL=${ODM_URL}/${ODM_VERSION}/icp-docker-compose-build-images-${ODM_VERSION}.zip;
-      curl -H "X-JFrog-Art-Api: $ARTIFACTORY_API_KEY" $ODM_ZIP_URL -o tmp.zip;
+      curl -u $ARTIFACTORY_USER:$ARTIFACTORY_PASSWORD $ODM_ZIP_URL -o tmp.zip;
       echo "ODM distribution: Download finished...";
       echo "ODM distribution: Unzipping...";
       if [ ! -d $HOME/.distrib ]; then
