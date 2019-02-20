@@ -3,6 +3,13 @@
 
 [![Build Status](https://travis-ci.org/ODMDev/decisions-ruleapp-rest-loader.svg?branch=master)](https://travis-ci.org/ODMDev/decisions-ruleapp-rest-loader)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+<p align="center">
+  <a href="https://join.slack.com/t/odmdev/shared_invite/enQtMjU0NzIwMjM1MTg0LTQyYTMzNGQ4NzJkMDYxMDU5MDRmYTM4MjcxN2RiMzNmZWZmY2UzYzRhMjk0N2FmZjU2YzJlMTRmN2FhZDY4NmQ">
+        Follow us on slack
+        <br>
+        <img src="https://a.slack-edge.com/436da/marketing/img/meta/favicon-32.png">
+  </a>
+</p>
 
 This Java SE sample illustrates how to execute a decision service _downloaded from the ODM Rule Execution Server Console_ in Java SE with IBM Operational Decision Manager. 
 
